@@ -89,7 +89,12 @@ function searchMulDiv(splitted,operators){
       //calc temp
       temp = splitted[i-1]*splitted[i]
       //replace the operator at that index
-      operators[i]="+"
+      if(i==(operators.length-1)){
+        operators[i]=operators[i-1]
+      }
+      else{
+        operators[i]="+"
+      }
       //swap out with result
       splitted[i-1]=0
       splitted[i]=temp
@@ -103,7 +108,13 @@ function searchMulDiv(splitted,operators){
       else{
             temp = splitted[i-1]/splitted[i]
             //replace the operator at that index
-            operators[i]="+"
+
+            if(i==(operators.length-1)){
+              operators[i]=operators[i-1]
+            }
+            else{
+              operators[i]="+"
+            }
             //swap out with result
             splitted[i-1]=0
             splitted[i]=temp
@@ -128,6 +139,7 @@ $(document).ready( function (){
       //retrieve the operators from the original buffer
       //note index 0 of operator is null, hence the first operator is at operators[1]
       let operators = splitMulti(buffer, splitted);
+      operators.pop()
       //console.log(splitted);
       //console.log(operators);
       var sum = 0
